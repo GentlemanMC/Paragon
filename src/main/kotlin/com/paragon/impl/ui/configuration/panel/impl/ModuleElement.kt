@@ -9,6 +9,7 @@ import com.paragon.impl.ui.configuration.panel.impl.setting.*
 import com.paragon.impl.ui.configuration.shared.RawElement
 import com.paragon.impl.ui.util.Click
 import com.paragon.util.render.ColourUtil.fade
+import com.paragon.util.render.ColourUtil.integrateAlpha
 import com.paragon.util.render.RenderUtil
 import com.paragon.util.render.font.FontUtil
 import me.surge.animation.Animation
@@ -69,7 +70,14 @@ class ModuleElement(val parent: CategoryPanel, val module: Module, x: Float, y: 
             if (module.settings.size > 2) parent.width - 15f else parent.width - 12f,
             parentTotalHeight.toFloat() - y
         )
-
+        RenderUtil.scaleTo(x + 3, y + 5f, 0f, 0.9, 0.9, 0.9) {
+            FontUtil.drawStringWithShadow(
+                module.name,
+                x + 3,
+                y + 5f,
+                Color(180, 180, 180))
+        }
+        if (ClickGUI.enabledText.value)
         RenderUtil.scaleTo(x + 3, y + 5f, 0f, 0.9, 0.9, 0.9) {
             FontUtil.drawStringWithShadow(
                 module.name,
@@ -77,6 +85,22 @@ class ModuleElement(val parent: CategoryPanel, val module: Module, x: Float, y: 
                 y + 5f,
                 Color(180, 180, 180).fade(Colours.mainColour.value, enabled.getAnimationFactor())
             )
+        }
+
+        else if (enabled.state && !ClickGUI.enabledText.value){
+            RenderUtil.scaleTo(x + 3, y + 5f, 0f, 0.9, 0.9, 0.9) {
+                RenderUtil.drawRect(
+                    x,
+                    y,
+                    parent.width,
+                    height,
+                    Colours.mainColour.value.integrateAlpha(Colours.mainColour.alpha))
+                FontUtil.drawStringWithShadow(
+                    module.name,
+                    x + 3,
+                    y + 5f,
+                    Color(250, 250, 250))
+            }
         }
 
         RenderUtil.popScissor()

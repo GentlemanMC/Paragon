@@ -28,6 +28,8 @@ object ClickGUI : Module("ClickGUI", Category.CLIENT, "The ClickGUI of the clien
     // Panel settings
     @JvmStatic
     val outline = Setting("Outline", false) describedBy "Outline the category panels" subOf style visibleWhen { style.value == Style.PANEL }
+    val enabledText = Setting("EnabledText", false) describedBy "Draw a rectangle when a module is enabled" subOf style visibleWhen { style.value == Style.PANEL }
+
 
     // Shared settings
     @JvmStatic
