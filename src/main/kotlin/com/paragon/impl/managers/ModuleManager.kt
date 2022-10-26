@@ -36,6 +36,7 @@ class ModuleManager {
 
             // Movement
             AntiVoid,
+            CornerClip,
             ElytraFlight,
             EntitySpeed,
             Flight,
